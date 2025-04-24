@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>List One Schools - Part A</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .header {
+      /*justify-content: center;*/
+      text-align: center;
+      z-index: 1000;
+      width: 100%;
+      margin-bottam: 140px;
+    }
+
+    .header img {
+      max-width: 100px;
+    }
+
+    .main-content {
+      /*margin-top: 150px;  Enough space for fixed header */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f5f5f5;
+      padding: 200px 0 10px 10px;
+    }
+
+    .login-form {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-form h2 {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .login-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .login-form button:hover {
+      background-color: #555;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="row position-fixed bg-warning mb-3 shadow p-2">
+        <div class="hdr text-center">
+          <div class="p-1 col-lg-12 col-md-6 col-sm-3 col-3">
+           <img class="logo" src="tnlogo.png">
+          </div>
+          <div class="col-lg-12 col-md-6 col-sm-9 col-9 p-1">
+           <h2 class="fw-bolder align-middle"> முதற்கட்ட பள்ளிகள் </h2>
+          </div>
+        </div> 
+    </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <form class="login-form" id="loginForm">
+      <h2 class="fw-bolder">Login</h2>
+
+      <label for="username">Username</label>
+      <input type="text" id="username" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" required>
+
+      <button type="submit">Login</button>
+      <p id="message" class="error"></p>
+    </form>
+  </div>
+
+  <!-- Login Script -->
+  <script>
+    const users = {
+  "4000481": "Smcob@9731",
+  "4000407": "Smcob@2591",
+  "4000159": "Smcob@8967",
+  "4000300": "Smcob@0160",
+  "4000327": "Smcob@1164",
+  "4000423": "Smcob@8315",
+  "4000349": "Smcob@3972",
+  "4000554": "Smcob@7572",
+  "4000243": "Smcob@9267",
+  "4000254": "Smcob@2284",
+  "4000284": "Smcob@3525",
+  "4000490": "Smcob@7865",
+  "4000492": "Smcob@8834",
+  "4000572": "Smcob@6868",
+  "4000560": "Smcob@3447",
+  "4000352": "Smcob@7263",
+  "4000500": "Smcob@7729",
+  "4000501": "Smcob@4654",
+  "4000502": "Smcob@5044",
+  "4000179": "Smcob@8725",
+  "4000507": "Smcob@7879",
+  "4000509": "Smcob@6666",
+  "4000512": "Smcob@7818",
+  "4000432": "Smcob@8027",
+  "4000233": "Smcob@1736",
+  "4000515": "Smcob@2580",
+  "4000516": "Smcob@4263",
+  "4000169": "Smcob@5688",
+  "4000225": "Smcob@9239",
+  "4000459": "Smcob@1087",
+  "4000519": "Smcob@4378",
+  "4000521": "Smcob@4572",
+  "4000310": "Smcob@9302",
+  "4000341": "Smcob@7053",
+  "4000522": "Smcob@2441",
+  "4000526": "Smcob@5911",
+  "4000410": "Smcob@4754",
+  "4000368": "Smcob@0349",
+  "4000174": "Smcob@4344",
+  "4000539": "Smcob@3473",
+  "4000538": "Smcob@0791",
+  "4000540": "Smcob@9358",
+  "4000222": "Smcob@5565",
+  "4000556": "Smcob@9836",
+  "4000531": "Smcob@7170",
+  "4000551": "Smcob@1041",
+  "4000528": "Smcob@7792",
+  "4000399": "Smcob@4672",
+  "4000249": "Smcob@3516",
+  "4000203": "Smcob@6321",
+  "4000545": "Smcob@4991",
+  "StateTeam" : "SMC@2025",
+};
+
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const message = document.getElementById("message");
+
+      if (users[username] && users[username] === password) {
+        window.location.href = "Home.html"; // Success
+      } else {
+        message.textContent = "Invalid username or password.";
+      }
+    });
+  </script>
+
+</body>
+</html>
